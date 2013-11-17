@@ -5,6 +5,7 @@ var childProcess = require('child_process')
 
 exports.identify = identify;
 exports.transcode = transcode;
+exports.merge = merge;
 
 var SENTINEL = /[\n\r]/
 
@@ -78,6 +79,17 @@ function identify(inputFile, callback){
       });
     });
   }
+}
+
+function merge (filesArray, outputFile, callback){
+  var args = filesArray;
+  args.push(outputFile);
+
+  var bin = childProcess.spawn('sox', args);
+
+  bin.on('close', function(code) {
+    callback();
+  });
 }
 
 function transcode(inputFile, outputFile, options) {
