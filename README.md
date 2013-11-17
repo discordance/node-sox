@@ -25,6 +25,16 @@ sox.identify('somefile.wav', function(err, results) {
 });
 ```
 
+### merge (overlay) some number of audio files
+
+```js
+var sox = require('sox');
+
+sox.merge(["1.mp3", "2.mp3"], "out.mp3", function(){
+  console.log("merge complete");
+});
+```
+
 ### transcode an audio file
 
 ```js
