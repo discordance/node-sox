@@ -83,6 +83,7 @@ function identify(inputFile, callback){
 
 function merge (filesArray, outputFile, callback){
   var args = filesArray;
+  args.unshift('-m'); // super-leet push to array head like woah
   args.push(outputFile);
 
   var bin = childProcess.spawn('sox', args);
