@@ -30,7 +30,7 @@ sox.identify('somefile.wav', function(err, results) {
 ```js
 var sox = require('sox');
 
-sox.merge(["1.mp3", "2.mp3"], "out.mp3", function(){
+sox.merge(["1.mp3", "2.mp3"], "out.mp3", { bitrate: "128", stereo: "stereo" } ,function(){
   console.log("merge complete");
 });
 ```

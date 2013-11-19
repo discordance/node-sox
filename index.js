@@ -81,14 +81,29 @@ function identify(inputFile, callback){
   }
 }
 
-function merge (filesArray, outputFile, callback){
+function merge (filesArray, outputFile, options, callback){
+  var bitrate     = options ? options.bitrate || "128" : "128";
+  var stereoMode  = options ? options.stereo.toLowerCase() || "stereo" : "stereo";
+
+  console.log("merge params: " + bitrate + "; " + stereoMode);
+
   var args = filesArray;
   args.unshift('-m'); // super-leet push to array head like woah
+  
+  // throw the output bitrate setting in there...
+  args.push("-C");
+  args.push(bitrate);
+
   args.push(outputFile);
 
   var bin = childProcess.spawn('sox', args);
 
   bin.on('close', function(code) {
+    if (code === 1){
+      console.log("merge errored out");
+    } else {
+      console.log("merge complete successfully");
+    }
     callback();
   });
 }
