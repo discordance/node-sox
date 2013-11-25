@@ -102,6 +102,7 @@ function merge (filesArray, outputFile, options, callback){
     bin.on('close', function(code) {
       if (code === 1){
         console.log("merge errored out");
+        callback("merge errored out");
       } else {
         console.log("merge complete successfully");
       }
@@ -113,6 +114,7 @@ function merge (filesArray, outputFile, options, callback){
     bin.on('close', function(code) {
       if (code === 1){
         console.log("merge errored out");
+        callback("merge errored out");
       } else {
         console.log("copy complete successfully");
       }
